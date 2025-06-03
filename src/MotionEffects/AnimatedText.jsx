@@ -63,7 +63,6 @@ export default function AnimatedText({ text }) {
                     display: flex;
                     justify-content: center;
                     align-items: center;
-                    margin-right: 22vw;
                     width: 100%;
                     visibility: hidden;
                 }

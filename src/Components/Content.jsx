@@ -22,7 +22,7 @@ export default function Content() {
             <div className="clouds clouds-2"></div>
             <div className="clouds clouds-3"></div>
             <section className="section">
-                <h1>Hola soy Iván Azagra👋</h1>
+                <h2>Hola soy Iván Azagra👋</h2>
                 <AnimatedText text={titles[currentIndex]} />
             </section>
             <section className="projects-section">
