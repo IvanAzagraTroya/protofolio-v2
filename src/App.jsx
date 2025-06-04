@@ -7,10 +7,10 @@ import './index.css'
 
 
 import Background from './Components/Background.jsx'
-import StarFieldHtml from './Components/BackgroundHtml.jsx'
 import CloudPane from './Components/Clouds.jsx'
 
 export default function App() {
+  
   return (
     <Canvas id='app_canvas' camera={{ position: [0, 0, 10], fov: 60 }}>
       <ScrollControls pages={4} damping={0.3} >
@@ -22,11 +22,8 @@ export default function App() {
 
         {/* Contenido HTML sincronizado con scroll */}
         <Scroll html>
-          <div style={{ width: "100vw", height: "100vh" }}>
-            <Content />
-            <StarFieldHtml />
-            {/* <CloudPane /> */}
-          </div>
+          <Content />
+          {/* <CloudPane /> */}
         </Scroll> 
       </ScrollControls>
     </Canvas>

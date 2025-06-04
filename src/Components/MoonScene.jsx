@@ -10,11 +10,9 @@ export default function MoonScene() {
 
   return (
     <>
-      <ambientLight intensity={0.5} />
-      <directionalLight position={[2, 2, 2]} intensity={0} />
-
+      <ambientLight intensity={0.65} />
       {/* 🌕 LUNA */}
-      <Float floatIntensity={2} speed={2}>
+      <Float floatIntensity={2} speed={2} rotationIntensity={1.5}>
         <mesh ref={meshRef} position={[0, 0, 0]}>
           <sphereGeometry args={[4, 128, 128]} />
           <meshStandardMaterial map={moonTexture} normalMap={moonNormal} roughness={1} metalness={0.4}/>
