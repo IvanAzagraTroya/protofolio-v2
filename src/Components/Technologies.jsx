@@ -1,11 +1,17 @@
 import { RiReactjsLine } from "react-icons/ri";
 import { FaPython } from "react-icons/fa";
+import { FaJava } from "react-icons/fa";
+import { FaAndroid } from "react-icons/fa6";
 import { SiMongodb } from "react-icons/si";
-import { DiRedis } from "react-icons/di";
-import { SiDjango } from "react-icons/si";
-import { SiFlask } from "react-icons/si";
+import { SiGodotengine } from "react-icons/si";
+import { SiOracle } from "react-icons/si";
+import { SiNeo4J } from "react-icons/si";
 import { BiLogoPostgresql } from "react-icons/bi"
-import { FaGolang } from "react-icons/fa6";
+import { TbBrandJavascript, TbBrandKotlin, 
+  TbBrandCSharp, TbBrandThreejs,
+  TbBrandFramerMotion, TbBrandDocker,
+  TbBrandUnity
+ } from "react-icons/tb";
 
 import { motion, AnimatePresence } from "motion/react";
 import { useState } from 'react'
@@ -15,17 +21,25 @@ import './Technologies.css'
 const categorizedIcons = {
     Frontend: [
       { Icon: RiReactjsLine, colorClass: "cyan", delay: 2.5 },
+      { Icon: TbBrandJavascript, colorClass: "yellow", delay: 4 },
+      { Icon: TbBrandThreejs, colorClass: "yellow", delay: 3 },
+      { Icon: TbBrandFramerMotion, colorClass: "orange", delay: 6 },
+      { Icon: FaAndroid, colorClass: "green", delay: 5 },
     ],
     Backend: [
-      { Icon: FaPython, colorClass: "blue", delay: 3 },
-      { Icon: SiDjango, colorClass: "dark-green", delay: 6 },
-      { Icon: SiFlask, colorClass: "orange", delay: 4 },
-      { Icon: FaGolang, colorClass: "light-blue", delay: 3.5 },
+      { Icon: FaPython, colorClass: "blue", delay: 2.5 },
+      { Icon: TbBrandCSharp, colorClass: "dark-green", delay: 6 },
+      { Icon: TbBrandKotlin, colorClass: "purple", delay: 4 },
+      { Icon: SiGodotengine, colorClass: "blue", delay: 3.5 },
+      { Icon: TbBrandDocker, colorClass: "cyan", delay: 5 },
+      { Icon: TbBrandUnity, colorClass: "", delay: 7 },
+      { Icon: FaJava, colorClass:"red", delay: 8}
     ],
     Databases: [
-      { Icon: SiMongodb, colorClass: "green", delay: 5 },
-      { Icon: DiRedis, colorClass: "red", delay: 2 },
+      { Icon: SiMongodb, colorClass: "green", delay: 2 },
       { Icon: BiLogoPostgresql, colorClass: "sky", delay: 3 },
+      { Icon: SiOracle, colorClass: "red", delay: 5 },
+      { Icon: SiNeo4J, colorClass: "light-blue", delay: 4 }
     ],
   };
   

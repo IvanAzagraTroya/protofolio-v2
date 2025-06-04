@@ -1,6 +1,14 @@
 import { FaLinkedin, FaGithub, FaTwitter } from "react-icons/fa";
 import "./Contact.css";
 import ScatterText from "../MotionEffects/ScatterText";
+import { MdEmail } from "react-icons/md";
+
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from './ui/tooltip'
 
 export default function Contact() {
   return (
@@ -31,6 +39,26 @@ export default function Contact() {
         >
           <FaTwitter />
         </a>
+        <TooltipProvider>
+        <Tooltip key={"email"}>
+          <TooltipTrigger asChild>
+            <a
+            href="mailto:ivanazagratroya@hotmail.com"
+            target="-blank"
+            className="icon-link"
+            >
+                <MdEmail />
+              </a>
+              </TooltipTrigger>
+              <TooltipContent
+                  side='bottom'
+                  // className='text-xs'
+              >
+                  ivanazagratroya@hotmail.com
+              </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+
       </div>
     </div>
   );
