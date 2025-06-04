@@ -52,6 +52,7 @@ export default function Contact() {
               </TooltipTrigger>
               <TooltipContent
                   side='bottom'
+                  style={{ fontSize: "0.75rem" }}
                   // className='text-xs'
               >
                   ivanazagratroya@hotmail.com
