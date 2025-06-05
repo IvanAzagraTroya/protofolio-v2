@@ -2,6 +2,8 @@ import React, { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import type { Variants } from "framer-motion";
 
+import gamepadIcon from "../assets/gamepad-svgrepo-com.svg";
+
 /**
  * Componente que muestra las cartas de proyectos en fila horizontal
  * y permite desplazarse por arrastre horizontal en lugar de botones.
@@ -220,12 +222,12 @@ const card: React.CSSProperties = {
 /** ============== Proyectos (imagen y colores) ============== */
 
 const projects: [string, number, number][] = [
-  ["public/gamepad-svgrepo-com.svg", 340, 10],
-  ["public/proyecto1.png", 20, 40],
-  ["public/proyecto2.png", 60, 90],
-  ["public/proyecto3.png", 80, 120],
-  ["public/proyecto4.png", 100, 140],
-  ["public/proyecto5.png", 205, 245],
-  ["public/proyecto6.png", 260, 290],
-  ["public/proyecto7.png", 290, 320],
+  [gamepadIcon, 340, 10],
+  ["./src/assets/proyecto1.png", 20, 40],
+  ["./src/assets/proyecto2.png", 60, 90],
+  ["./src/assets/proyecto3.png", 80, 120],
+  ["./src/assets/proyecto4.png", 100, 140],
+  ["./src/assets/proyecto5.png", 205, 245],
+  ["./src/assets/proyecto6.png", 260, 290],
+  ["./src/assets/proyecto7.png", 290, 320],
 ];

@@ -1,5 +1,5 @@
 {
-  "name": "myapp",
+  "name": "portfolio_ivan",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist -b prod"
   },
   "dependencies": {
     "@radix-ui/react-tooltip": "^1.2.7",
@@ -15,6 +17,7 @@
     "@react-three/fiber": "^9.1.2",
     "@use-gesture/react": "^10.3.1",
     "framer-motion": "^12.15.0",
+    "gh-pages": "^6.3.0",
     "motion": "^12.12.1",
     "motion-plus": "^0.1.9",
     "react": "^19.1.0",

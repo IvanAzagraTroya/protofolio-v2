@@ -1,12 +1,14 @@
 import { Float } from '@react-three/drei'
 import { useRef } from 'react'
 import * as THREE from 'three'
+import MoonTexture from '../assets/moonTexture.png'
+import MoonMap from '../assets/NormalMapMoon.jpg'
 
 export default function MoonScene() {
   const meshRef = useRef()
 
-  const moonTexture = new THREE.TextureLoader().load('public/moonTexture.png');
-  const moonNormal = new THREE.TextureLoader().load('public/NormalMapMoon.jpg');
+  const moonTexture = new THREE.TextureLoader().load(MoonTexture);
+  const moonNormal = new THREE.TextureLoader().load(MoonMap);
 
   return (
     <>

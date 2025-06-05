@@ -16,7 +16,7 @@ export default function Contact() {
       <ScatterText />
       <div className="icon-list">
         <a
-          href="www.linkedin.com/in/iván-azagra-troya-2a7599215"
+          href="https://www.linkedin.com/in/iván-azagra-troya-2a7599215"
           target="_blank"
           rel="noopener noreferrer"
           className="icon-link"
