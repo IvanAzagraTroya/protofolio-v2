@@ -13,7 +13,7 @@ export default function App() {
   
   return (
     <Canvas id='app_canvas' camera={{ position: [0, 0, 10], fov: 60 }}>
-      <ScrollControls pages={4} damping={0.3} >
+      <ScrollControls pages={5} damping={0.3} >
         {/* Contenido 3D sincronizado con scroll */}
         <Scroll>
           <MoonScene />

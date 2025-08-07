@@ -12,7 +12,6 @@ import { TbBrandJavascript, TbBrandKotlin,
   TbBrandFramerMotion, TbBrandDocker,
   TbBrandUnity
  } from "react-icons/tb";
-
 import { motion, AnimatePresence } from "motion/react";
 import { useState } from 'react'
 
@@ -33,7 +32,7 @@ const categorizedIcons = {
       { Icon: SiGodotengine, colorClass: "blue", delay: 3.5 },
       { Icon: TbBrandDocker, colorClass: "cyan", delay: 5 },
       { Icon: TbBrandUnity, colorClass: "", delay: 7 },
-      { Icon: FaJava, colorClass:"red", delay: 8}
+      { Icon: FaJava, colorClass:"red", delay: 8},
     ],
     Databases: [
       { Icon: SiMongodb, colorClass: "green", delay: 2 },
