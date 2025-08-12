@@ -45,6 +45,7 @@ export default function StarFieldHtml() {
   return (
     <div
       ref={containerRef}
+      loading="lazy"
       style={{
         position: "absolute",
         top: 0,

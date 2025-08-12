@@ -20,8 +20,13 @@ import { TbBrandJavascript, TbBrandKotlin,
  
 import { GiCannon } from "react-icons/gi";
  
-//import Lottiefiles from "/lottiefiles.svg";
 import { IconType } from "react-icons";
+
+import Gamepad from "../assets/icons/gamepad-svgrepo-com.svg"
+
+import ComputerIcon from "../assets/icons/computer-icon.svg"
+import SmartphoneIcon from "../assets/icons/smartphone-icon.svg"
+import SmartphoneRotateIcon from "../assets/icons/smartphone-rotate-icon.svg"
 
 /**
  * Componente que muestra las cartas de proyectos en fila horizontal
@@ -112,11 +117,11 @@ export default function ScrollTriggered() {
         style={{ ...horizontalContainer, cursor: cursorType }}
         className="hide-scrollbar"
       >
-        {projects.map(([imageSrc, title, description, technologies, hueA, hueB, links], i) => (
+        {projects.map(([imageSrc, title, description, technologies, hueA, hueB, links, plataforma], i) => (
           <Card key={i} i={i} imageSrc={imageSrc} hueA={hueA} 
           hueB={hueB} isSelected={i === selectedCard}
           onClick={() => setSelectedCard(prev => (prev === i ? null : i))} title = {title} 
-          description = {description} technologies = {technologies} links = {links}/>
+          description = {description} technologies = {technologies} links = {links} plataforma={plataforma}/>
           
         ))}
       </div>
@@ -135,9 +140,10 @@ interface CardProps {
   description: string;
   technologies: IconType[];
   links: string[];
+  plataforma: string[];
 }
 
-function Card({ imageSrc, hueA, hueB, i, isSelected, onClick, title, description, technologies, links }: CardProps) {
+function Card({ imageSrc, hueA, hueB, i, isSelected, onClick, title, description, technologies, links, plataforma }: CardProps) {
   const background = `linear-gradient(306deg, ${hue(hueA)}, ${hue(hueB)})`;
 
   const iconNames: Record<string, string> = {
@@ -200,6 +206,7 @@ function Card({ imageSrc, hueA, hueB, i, isSelected, onClick, title, description
       <motion.div style={card} variants={cardVariants}>
         <img
           src={imageSrc}
+          loading="lazy"
           alt={`Project ${i + 1}`}
           style={{ width: "80%", height: "80%", objectFit: "contain" }}
         />
@@ -207,93 +214,138 @@ function Card({ imageSrc, hueA, hueB, i, isSelected, onClick, title, description
       </motion.div>
 
       {isSelected && (
-      <motion.div
+        <motion.div
         style={{
           position: "absolute",
           top: 0,
           left: 0,
-          width: "75%",
-          height: "80%",
+          width: "90%",
+          height: "90%",
+          maxWidth: "90vw", // límite máximo relativo a la pantalla
+          maxHeight: "90vh", // límite máximo relativo a la pantalla
           backgroundColor: "rgba(216, 226, 223, 0.7)",
           color: "#000000",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          padding: "20px",
+          padding: "2%",
           borderRadius: 20,
           zIndex: 2,
           textAlign: "center",
-          transform: "Rotate(-10deg) ",
+          transform: "rotate(-10deg)",
           transformOrigin: "75% 50%",
-
+          overflow: "hidden", // evita scroll y que se salga
+          boxSizing: "border-box",
         }}
         variants={cardVariants}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
       >
-        <div>
-          <h3 style={{ fontSize: 22, marginBottom: 10 }}>{title}</h3>
-          <p style={{ fontSize: 16, marginBottom: 10 }}>{description}</p>
-          <div style={{
-            display: "flex",
-            flexWrap: "wrap",
-            justifyContent: "center",
-            gap: "10px",
-            marginTop: 10
+        <div style={{ maxWidth: "100%", wordBreak: "break-word" }}>
+          <h3 style={{ fontSize: "clamp(14px, 2vw, 22px)", marginBottom: 5 }}>{title}</h3>
+          <p style={{ fontSize: "clamp(12px, 1.8vw, 16px)", marginBottom: 5 }}>{description}</p>
+      
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              justifyContent: "center",
+              gap: "8px",
+              marginTop: 10,
+              maxWidth: "100%",
             }}
           >
-          {technologies.map((Icon, idx) => {
-            const iconName = iconNames[Icon.name] || "Tecnología";
-
-            return (
-              <span
-                key={idx}
-                title={iconName}
-                style={{
-                  margin: "0 8px",
-                  display: "inline-block",
-                  transition: "transform 0.3s ease",
-                  cursor: "pointer",
-                }}
-                onMouseEnter={e => (e.currentTarget.style.transform = "scale(1.3)")}
-                onMouseLeave={e => (e.currentTarget.style.transform = "scale(1)")}
-              >
-                <Icon style={{ fontSize: 24 }} />
-              </span>
-            );
-          })}
-
-          </div>
-          <div>
-            <h3 style={{ fontSize: 22, marginBottom: 10, textDecoration: "underline" }}>Links: </h3>
-            {links.map((link, idx) => {
-              const isGithub = link.includes("github");
-              const isGithubio = link.includes("github.io");
-              const iconSrc = isGithub && !isGithubio
-                ? "./github.svg"
-                : "./web.svg";  
-
+            {technologies.map((Icon, idx) => {
+              const iconName = iconNames[Icon.name] || "Tecnología";
               return (
-                <a
+                <span
                   key={idx}
-                  href={link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{ marginRight: "10px" }}
+                  title={iconName}
+                  style={{
+                    display: "inline-block",
+                    transition: "transform 0.3s ease",
+                    cursor: "pointer",
+                  }}
+                  onMouseEnter={e => (e.currentTarget.style.transform = "scale(1.3)")}
+                  onMouseLeave={e => (e.currentTarget.style.transform = "scale(1)")}
                 >
-                  <img
-                    src={iconSrc}
-                    alt={isGithub && !isGithubio ? "GitHub" : "Web"}
-                    style={{ width: "40px", height: "40px" }}
-                  />
-                </a>
+                  <Icon style={{ fontSize: "clamp(18px, 2vw, 24px)" }} />
+                </span>
               );
             })}
           </div>
+      
+          {/* Links */}
+          {links.length > 0 && (
+            <div>
+              <h3 style={{ fontSize: "clamp(14px, 2vw, 20px)", marginBottom: 1, textDecoration: "underline", marginBlockStart: "0" }}>
+                Links:
+              </h3>
+              {links.map((link, idx) => {
+                const isGithub = link.includes("github");
+                const isGithubio = link.includes("github.io");
+                const iconSrc =
+                  isGithub && !isGithubio ? "./github.svg" : "./web.svg";
+                return (
+                  <a
+                    key={idx}
+                    href={link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ marginRight: "2px", lineHeight: "0.5"}}
+                  >
+                    <img
+                      src={iconSrc}
+                      loading="lazy"
+                      alt={isGithub && !isGithubio ? "GitHub" : "Web"}
+                      style={{ width: "clamp(20px, 3vw, 35px)", height: "auto" }}
+                    />
+                  </a>
+                );
+              })}
+            </div>
+          )}
+      
+          {/* Plataformas */}
+          {plataforma.length > 0 && (
+            <div>
+              <h3 style={{ fontSize: "clamp(12px, 1.5vw, 15px)", marginBottom: 1, textDecoration: "underline", marginBlockStart: "0"}}>
+                Mejor en:
+              </h3>
+              {plataforma.map((p, idx) => {
+                let iconSrc;
+                switch (p) {
+                  case "computer":
+                    iconSrc = ComputerIcon;
+                    break;
+                  case "smartphone":
+                    iconSrc = SmartphoneIcon;
+                    break;
+                  case "rotated":
+                    iconSrc = SmartphoneRotateIcon;
+                    break;
+                }
+                return (
+                  <a
+                    key={idx}
+                    style={{ marginRight: "2px", lineHeight: "0.5"}}
+                  >
+                    <img
+                      key={idx}
+                      loading="lazy"
+                      src={iconSrc}
+                      alt={p}
+                      style={{ width: "clamp(14px, 2vw, 20px)", height: "auto" }}
+                    />
+                  </a>
+                );
+              })}
+            </div>
+          )}
         </div>
-      </motion.div>
+      </motion.div>    
     )}
     </motion.div>
   );
@@ -393,13 +445,13 @@ const card: React.CSSProperties = {
 
 /** ============== Proyectos (imagen y colores) ============== */
 
-const projects: [string, string, string, IconType[], number, number, string[]][] = [
-  ["src/assets/gamepad-svgrepo-com.svg","Portfolio",  "Portfolio web con elementos 3D", [RiReactjsLine, TbBrandJavascript, TbBrandThreejs, TbBrandFramerMotion], 340, 10, ["https://github.com/IvanAzagraTroya/protofolio-v2", "https://ivanazagratroya.github.io/protofolio-v2/"]],
-  ["src/assets/gamepad-svgrepo-com.svg", "3DPong", "Juego Pong hecho en 3D", [RiReactjsLine, TbBrandJavascript, TbBrandThreejs, GiCannon], 20, 40, ["https://github.com/IvanAzagraTroya/React-Pong3D", "https://3dpong-sigma.vercel.app/"]],
-  ["src/assets/gamepad-svgrepo-com.svg", "Onlycats Backend", "Red social para compartir contenido de gatos", [TbBrandCSharp, SiMongodb, SiPostgresql, TbBrandDocker, SiDotnet], 60, 90, ["https://github.com/IvanAzagraTroya/Onlycats"]],
-  ["src/assets/gamepad-svgrepo-com.svg", "Onlycats Frontend", "Web de la red social", [RiReactjsLine, TbBrandJavascript], 80, 120, ["https://github.com/IvanAzagraTroya/onlycatsfrontend"]],
+const projects: [string, string, string, IconType[], number, number, string[], string[]][] = [
+  [Gamepad,"Portfolio",  "Portfolio web con elementos 3D", [RiReactjsLine, TbBrandJavascript, TbBrandThreejs, TbBrandFramerMotion], 340, 10, ["https://github.com/IvanAzagraTroya/protofolio-v2", "https://ivanazagratroya.github.io/protofolio-v2/"], ["computer", "smartphone"]],
+  [Gamepad, "3DPong", "Juego Pong hecho en 3D", [RiReactjsLine, TbBrandJavascript, TbBrandThreejs, GiCannon], 20, 40, ["https://github.com/IvanAzagraTroya/React-Pong3D", "https://3dpong-sigma.vercel.app/"], ["computer", "rotated"]],
+  [Gamepad, "Onlycats Backend", "Red social para compartir contenido de gatos", [TbBrandCSharp, SiMongodb, SiPostgresql, TbBrandDocker, SiDotnet], 60, 90, ["https://github.com/IvanAzagraTroya/Onlycats"], []],
+  [Gamepad, "Onlycats Frontend", "Web de la red social", [RiReactjsLine, TbBrandJavascript], 80, 120, ["https://github.com/IvanAzagraTroya/onlycatsfrontend"], ["computer"]],
   // ["./src/assets/proyecto4.png", "title5", "description5", [SiGodotengine], 100, 140],
-  ["src/assets/gamepad-svgrepo-com.svg", "Slimy Dice", "Juego para la GMTK Jam 2022 con temática 'Roll the dice'", [TbBrandUnity, TbBrandCSharp], 205, 245, []],
-  // ["./src/assets/proyecto6.png", "title7", "description7", [], 260, 290],
-  ["src/assets/gamepad-svgrepo-com.svg", "Supertechnology", "Proyecto de gestión para e-commerce por microservicios", [TbBrandKotlin, FaJava, SiMongodb, SiRedis, SiMariadb, SiPostgresql, SiSpring, SiKtor], 290, 320, ["https://github.com/IvanAzagraTroya/SuperTechnology"]],
+  [Gamepad, "Slimy Dice", "Juego para la GMTK Jam 2022 con temática 'Roll the dice'", [TbBrandUnity, TbBrandCSharp], 205, 245, [], ["computer"]],
+  // ["./src/assets/proyecto6.png", "title7", "description7", [], 260, 290, ["link"], [computer]],
+  [Gamepad, "Supertechnology", "Proyecto de gestión para e-commerce por microservicios", [TbBrandKotlin, FaJava, SiMongodb, SiRedis, SiMariadb, SiPostgresql, SiSpring, SiKtor], 290, 320, ["https://github.com/IvanAzagraTroya/SuperTechnology"], []],
 ];

@@ -1,77 +1,76 @@
-"use client"
-
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import { animate, stagger } from "motion"
-import { splitText } from "motion-plus"
+import React from "react"
 
-export default function AnimatedText({ text }) {
-    const containerRef = useRef(null)
+function AnimatedText({ text }) {
+  const containerRef = useRef(null)
+  const [chars, setChars] = useState([])
 
-    useEffect(() => {
-        const el = containerRef.current
-        if (!el) return
+  // Cuando cambia el texto, lo convertimos a array de caracteres
+  useEffect(() => {
+    setChars(text.split(''))
+  }, [text])
 
-        // Asegurarse que las fuentes están listas
-        document.fonts.ready.then(() => {
-            const target = el.querySelector(".animated-text")
-            if (!target) return
+  useEffect(() => {
+    if (!containerRef.current) return
 
-            // Limpiar texto anterior si lo hay
-            target.innerHTML = text
+    const elements = containerRef.current.querySelectorAll('.split-char')
+    if (elements.length === 0) return
 
-            // Split en caracteres
-            const { chars } = splitText(target)
-
-            // Mostrar el contenedor
-            el.style.visibility = "visible"
-
-            // Animación de entrada
-            animate(
-                chars,
-                { opacity: [0, 1], y: [10, 0] },
-                {
-                    duration: 1,
-                    delay: stagger(0.1),
-                    easing: "ease-out",
-                }
-            )
-
-            // Animación infinita tipo wavy
-            animate(
-                chars,
-                { y: [-10, 10] },
-                {
-                    repeat: Infinity,
-                    repeatType: "mirror",
-                    duration: 2,
-                    easing: "easeInOut",
-                    delay: stagger(0.15, {
-                        startDelay: -chars.length * 0.15,
-                    }),
-                }
-            )
-        })
-    }, [text]) // <- Se reinicia al cambiar el texto
-
-    return (
-        <div className="text-container" ref={containerRef}>
-            <h1>
-                <span className="animated-text">{text}</span>
-            </h1>
-            <style>{`
-                .text-container {
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    width: 100%;
-                    visibility: hidden;
-                }
-
-                .split-char {
-                    display: inline-block;
-                    will-change: transform, opacity;
-                }
-            `}</style>
-        </div>
+    // Animación entrada
+    animate(
+      elements,
+      { opacity: [0, 1], y: [10, 0] },
+      {
+        duration: 1,
+        delay: stagger(0.1),
+        easing: "ease-out",
+      }
     )
+
+    // Animación wavy infinita
+    animate(
+      elements,
+      { y: [-10, 10] },
+      {
+        repeat: Infinity,
+        repeatType: "mirror",
+        duration: 2,
+        easing: "easeInOut",
+        delay: stagger(0.15, {
+          startDelay: -elements.length * 0.15,
+        }),
+      }
+    )
+  }, [chars])
+
+  return (
+    <div
+      className="text-container"
+      ref={containerRef}
+      style={{ visibility: chars.length ? 'visible' : 'hidden' }}
+    >
+      <h1>
+        {chars.map((char, i) => (
+          <span key={i} className="split-char">
+            {char === ' ' ? '\u00A0' : char}
+          </span>
+        ))}
+      </h1>
+      <style>{`
+        .text-container {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 100%;
+        }
+        .split-char {
+          display: inline-block;
+          will-change: transform, opacity;
+        }
+      `}</style>
+    </div>
+  )
 }
+
+export default React.memo(AnimatedText)

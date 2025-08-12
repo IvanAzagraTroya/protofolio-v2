@@ -73,16 +73,16 @@ body a span {
 }
 
 .clouds-1 {
-  background-image: url("/clouds_2.webp");
+  background-image: url("/clouds_2_1.webp");
   animation: clouds-loop-1 20s infinite linear;
 }
 
 .clouds-2 {
-  background-image: url("/clouds_1.webp");
+  background-image: url("/clouds_1_1.webp");
   animation: clouds-loop-2 15s infinite linear;
 }
 
 .clouds-3 {
-  background-image: url("/clouds_3.webp");
+  background-image: url("/clouds_3_1.webp");
   animation: clouds-loop-3 17s infinite linear;
 }

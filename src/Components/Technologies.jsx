@@ -1,3 +1,4 @@
+import React, {Suspense} from "react"
 import { RiReactjsLine } from "react-icons/ri";
 import { FaPython } from "react-icons/fa";
 import { FaJava } from "react-icons/fa";
@@ -16,6 +17,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { useState } from 'react'
 
 import './Technologies.css'
+import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 
 const categorizedIcons = {
     Frontend: [
@@ -77,7 +79,24 @@ const categorizedIcons = {
             ))}
           </ul>
         </nav>
-        <main style={iconContainer}>
+        <main style={{ ...iconContainer, position: "relative", overflow: "hidden" }}>
+          {/* Fondo animado */}
+          <Suspense>
+            <DotLottieReact
+              src={"./BackgroundLoopingAnimation.json"}
+              loop={true}
+              autoplay={true}
+              style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                width: "100%",
+                height: "100%",
+                zIndex: -1,
+              }}
+            />
+          </Suspense>
+
           <AnimatePresence mode="wait">
             <motion.div
               key={selectedTab ? selectedTab.label : "empty"}
@@ -89,13 +108,13 @@ const categorizedIcons = {
             >
               <div className="technologies-container">
                 <div className="technologies-grid">
-                {categorizedIcons[selectedTab.label].map(
-                  ({ Icon, colorClass, delay }, index) => (
-                    <div key={index} className={`icon-wrapper bounce-${delay}`}>
-                      <Icon className={`icon ${colorClass}`} />
-                    </div>
-                  )
-                )}
+                  {categorizedIcons[selectedTab.label].map(
+                    ({ Icon, colorClass, delay }, index) => (
+                      <div key={index} className={`icon-wrapper bounce-${delay}`}>
+                        <Icon className={`icon ${colorClass}`} />
+                      </div>
+                    )
+                  )}
                 </div>
               </div>
             </motion.div>
@@ -109,7 +128,8 @@ const categorizedIcons = {
     width: "100%",
     maxWidth: 700,
     margin: "0 auto",
-    height: "500px",
+    minHeight: "fit-content",
+    height: "600px",
     borderRadius: 10,
     background: "rgb(255, 255, 255, 0.2)",
     overflow: "hidden",
@@ -176,8 +196,11 @@ const categorizedIcons = {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    minWidth: "fit-content", // se ajusta al contenido
+    minHeight: "fit-content",
     opacity: 1,
     flex: 1,
-    padding: 20,
+    padding: 10,
+    overflow: "visible"
   };
   

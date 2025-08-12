@@ -26,6 +26,11 @@ html, body, #root {
   z-index: 0; /* Ajusta según tu necesidad */
 }
 
+#div_section{
+  min-height: 100vh;
+  min-width: 100vw;
+}
+
 section {
   min-height: 100vh;
   display: flex;
