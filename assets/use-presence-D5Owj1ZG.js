@@ -1,0 +1,2 @@
+import{d as t,P as u}from"./index-Bu6GicU3.js";function c(e){return typeof e=="object"&&e!==null}function P(e){return c(e)&&"offsetHeight"in e}function x(e=!0){const s=t.useContext(u);if(s===null)return[!0,null];const{isPresent:o,onExitComplete:n,register:i}=s,r=t.useId();t.useEffect(()=>{if(e)return i(r)},[e]);const f=t.useCallback(()=>e&&n&&n(r),[r,n,e]);return!o&&n?[!1,f]:[!0]}function p(){return a(t.useContext(u))}function a(e){return e===null?!0:e.isPresent}export{x as a,c as b,P as i,p as u};
+//# sourceMappingURL=use-presence-D5Owj1ZG.js.map
