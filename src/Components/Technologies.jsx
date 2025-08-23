@@ -1,128 +1,129 @@
-import React, {Suspense} from "react"
+import React, { Suspense, useState, useEffect } from "react";
 import { RiReactjsLine } from "react-icons/ri";
-import { FaPython } from "react-icons/fa";
-import { FaJava } from "react-icons/fa";
+import { FaPython, FaJava } from "react-icons/fa";
 import { FaAndroid } from "react-icons/fa6";
-import { SiMongodb } from "react-icons/si";
-import { SiGodotengine } from "react-icons/si";
-import { SiOracle } from "react-icons/si";
-import { SiNeo4J } from "react-icons/si";
-import { BiLogoPostgresql } from "react-icons/bi"
-import { TbBrandJavascript, TbBrandKotlin, 
-  TbBrandCSharp, TbBrandThreejs,
-  TbBrandFramerMotion, TbBrandDocker,
-  TbBrandUnity
- } from "react-icons/tb";
-import { motion, AnimatePresence } from "motion/react";
-import { useState } from 'react'
+import { SiMongodb, SiGodotengine, SiOracle, SiNeo4J } from "react-icons/si";
+import { BiLogoPostgresql } from "react-icons/bi";
+import { TbBrandJavascript, TbBrandKotlin, TbBrandCSharp, TbBrandThreejs, TbBrandFramerMotion, TbBrandDocker, TbBrandUnity } from "react-icons/tb";
+import {AnimatePresence} from "framer-motion"
+import * as m from "framer-motion/m";
 
-import './Technologies.css'
-import { DotLottieReact } from "@lottiefiles/dotlottie-react";
+import './Technologies.css';
+
+const LazyDotLottie = React.lazy(() =>
+  import("@lottiefiles/dotlottie-react").then(module => ({ default: module.DotLottieReact }))
+);
 
 const categorizedIcons = {
-    Frontend: [
-      { Icon: RiReactjsLine, colorClass: "cyan", delay: 2.5 },
-      { Icon: TbBrandJavascript, colorClass: "yellow", delay: 4 },
-      { Icon: TbBrandThreejs, colorClass: "yellow", delay: 3 },
-      { Icon: TbBrandFramerMotion, colorClass: "orange", delay: 6 },
-      { Icon: FaAndroid, colorClass: "green", delay: 5 },
-    ],
-    Backend: [
-      { Icon: FaPython, colorClass: "blue", delay: 2.5 },
-      { Icon: TbBrandCSharp, colorClass: "dark-green", delay: 6 },
-      { Icon: TbBrandKotlin, colorClass: "purple", delay: 4 },
-      { Icon: SiGodotengine, colorClass: "blue", delay: 3.5 },
-      { Icon: TbBrandDocker, colorClass: "cyan", delay: 5 },
-      { Icon: TbBrandUnity, colorClass: "", delay: 7 },
-      { Icon: FaJava, colorClass:"red", delay: 8},
-    ],
-    Databases: [
-      { Icon: SiMongodb, colorClass: "green", delay: 2 },
-      { Icon: BiLogoPostgresql, colorClass: "sky", delay: 3 },
-      { Icon: SiOracle, colorClass: "red", delay: 5 },
-      { Icon: SiNeo4J, colorClass: "light-blue", delay: 4 }
-    ],
-  };
-  
-  const tabs = [
-    { icon: "⚛️", label: "Frontend" },
-    { icon: "🐍", label: "Backend" },
-    { icon: "💾", label: "Databases" },
-  ];
-  
-  export default function TechnologiesTabs() {
-    const [selectedTab, setSelectedTab] = useState(tabs[0]);
-  
-    return (
-        <div style={container}>
-        <nav style={nav}>
-          <ul style={tabsContainer}>
-            {tabs.map((item) => (
-              <motion.li
-                key={item.label}
-                initial={false}
-                animate={{
-                  backgroundColor: item === selectedTab ? "#eee" : "#eee0",
-                }}
-                style={tab}
-                onClick={() => setSelectedTab(item)}
-              >
-                {`${item.icon} ${item.label}`}
-                {item === selectedTab ? (
-                  <motion.div
-                    style={underline}
-                    layoutId="underline"
-                    id="underline"
-                  />
-                ) : null}
-              </motion.li>
-            ))}
-          </ul>
-        </nav>
-        <main style={{ ...iconContainer, position: "relative", overflow: "hidden" }}>
-          {/* Fondo animado */}
-          <Suspense>
-            <DotLottieReact
-              src={"./BackgroundLoopingAnimation.json"}
-              loop={true}
-              autoplay={true}
-              style={{
-                position: "absolute",
-                top: 0,
-                left: 0,
-                width: "100%",
-                height: "100%",
-                zIndex: -1,
-              }}
-            />
-          </Suspense>
+  Frontend: [
+    { Icon: RiReactjsLine, colorClass: "cyan", delay: 2.5 },
+    { Icon: TbBrandJavascript, colorClass: "yellow", delay: 4 },
+    { Icon: TbBrandThreejs, colorClass: "yellow", delay: 3 },
+    { Icon: TbBrandFramerMotion, colorClass: "orange", delay: 6 },
+    { Icon: FaAndroid, colorClass: "green", delay: 5 },
+  ],
+  Backend: [
+    { Icon: FaPython, colorClass: "blue", delay: 2.5 },
+    { Icon: TbBrandCSharp, colorClass: "dark-green", delay: 6 },
+    { Icon: TbBrandKotlin, colorClass: "purple", delay: 4 },
+    { Icon: SiGodotengine, colorClass: "blue", delay: 3.5 },
+    { Icon: TbBrandDocker, colorClass: "cyan", delay: 5 },
+    { Icon: TbBrandUnity, colorClass: "", delay: 7 },
+    { Icon: FaJava, colorClass:"red", delay: 8 },
+  ],
+  Databases: [
+    { Icon: SiMongodb, colorClass: "green", delay: 2 },
+    { Icon: BiLogoPostgresql, colorClass: "sky", delay: 3 },
+    { Icon: SiOracle, colorClass: "red", delay: 5 },
+    { Icon: SiNeo4J, colorClass: "light-blue", delay: 4 }
+  ],
+};
 
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={selectedTab ? selectedTab.label : "empty"}
-              initial={{ y: 10, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              exit={{ y: -10, opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              style={{ width: "100%" }}
+const tabs = [
+  { icon: "⚛️", label: "Frontend" },
+  { icon: "🐍", label: "Backend" },
+  { icon: "💾", label: "Databases" },
+];
+
+export default function TechnologiesTabs() {
+  const [selectedTab, setSelectedTab] = useState(tabs[0]);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const mobile = /Mobi|Android/i.test(navigator.userAgent);
+    setIsMobile(mobile);
+  }, []);
+
+  return (
+    <div style={container}>
+      <nav style={nav}>
+        <ul style={tabsContainer}>
+          {tabs.map(item => (
+            <m.li
+              key={item.label}
+              initial={false}
+              animate={{ backgroundColor: item === selectedTab ? "#eee" : "#eee0" }}
+              style={tab}
+              onClick={() => setSelectedTab(item)}
             >
-              <div className="technologies-container">
-                <div className="technologies-grid">
-                  {categorizedIcons[selectedTab.label].map(
-                    ({ Icon, colorClass, delay }, index) => (
+              {`${item.icon} ${item.label}`}
+              {item === selectedTab && <m.div style={underline} layoutId="underline" />}
+            </m.li>
+          ))}
+        </ul>
+      </nav>
+
+      <main style={{ ...iconContainer, position: "relative", overflow: "hidden" }}>
+
+        {isMobile ? (
+          // Versión móvil sin animaciones
+          <div className="technologies-container">
+            <div className="technologies-grid">
+              {categorizedIcons[selectedTab.label].map(({ Icon, colorClass }, index) => (
+                <div key={index} className={`icon-wrapper`}>
+                  <Icon className={`icon ${colorClass}`} />
+                </div>
+              ))}
+            </div>
+          </div>
+        ) : (
+          // Versión ordenador
+          <>
+            <Suspense>
+              <LazyDotLottie
+                src={"./BackgroundLoopingAnimation.json"}
+                loop
+                autoplay
+                style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", zIndex: -1 }}
+              />
+            </Suspense>
+            <AnimatePresence mode="wait">
+              <m.div
+                key={selectedTab.label}
+                initial={{ y: 10, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: -10, opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                style={{ width: "100%" }}
+              >
+                <div className="technologies-container">
+                  <div className="technologies-grid">
+                    {categorizedIcons[selectedTab.label].map(({ Icon, colorClass, delay }, index) => (
                       <div key={index} className={`icon-wrapper bounce-${delay}`}>
                         <Icon className={`icon ${colorClass}`} />
                       </div>
-                    )
-                  )}
+                    ))}
+                  </div>
                 </div>
-              </div>
-            </motion.div>
-          </AnimatePresence>
-        </main>
-      </div>
-    );
-  }
+              </m.div>
+            </AnimatePresence>
+          </>
+        )}
+      </main>
+    </div>
+  );
+}
+
   
   const container = {
     width: "100%",

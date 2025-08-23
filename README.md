@@ -1,7 +1,5 @@
 # TO-DO:
-- Poner los proyectos en la sección de proyectos
-- Añadir tooltips a los iconos
-- Hacer la sección de About me
+- Poner las imágenes de los proyectos
 
 # React + Vite
 

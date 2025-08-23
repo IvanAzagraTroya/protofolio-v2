@@ -5,10 +5,6 @@ import Content from './Components/Content.jsx'
 
 import './index.css'
 
-
-import Background from './Components/Background.jsx'
-import CloudPane from './Components/Clouds.jsx'
-
 export default function App() {
   
   return (
@@ -17,13 +13,11 @@ export default function App() {
         {/* Contenido 3D sincronizado con scroll */}
         <Scroll>
           <MoonScene />
-          <Background />
         </Scroll>
 
         {/* Contenido HTML sincronizado con scroll */}
         <Scroll html>
           <Content />
-          {/* <CloudPane /> */}
         </Scroll> 
       </ScrollControls>
     </Canvas>

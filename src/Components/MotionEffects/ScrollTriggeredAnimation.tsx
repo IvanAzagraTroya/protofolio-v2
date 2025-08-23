@@ -22,11 +22,11 @@ import { GiCannon } from "react-icons/gi";
  
 import { IconType } from "react-icons";
 
-import Gamepad from "../assets/icons/gamepad-svgrepo-com.svg"
+import Gamepad from "../../assets/icons/gamepad-svgrepo-com.svg"
 
-import ComputerIcon from "../assets/icons/computer-icon.svg"
-import SmartphoneIcon from "../assets/icons/smartphone-icon.svg"
-import SmartphoneRotateIcon from "../assets/icons/smartphone-rotate-icon.svg"
+import ComputerIcon from "../../assets/icons/computer-icon.svg"
+import SmartphoneIcon from "../../assets/icons/smartphone-icon.svg"
+import SmartphoneRotateIcon from "../../assets/icons/smartphone-rotate-icon.svg"
 
 /**
  * Componente que muestra las cartas de proyectos en fila horizontal
@@ -380,7 +380,6 @@ const wrapper: React.CSSProperties = {
   position: "relative",
   width: "100%",
   height: "100%",
-  padding: "30px 15px",
   overflow: "visible"
 };
 
@@ -392,7 +391,6 @@ const horizontalContainer: React.CSSProperties = {
   overflowX: "scroll",
   overflowY: "visible",
   scrollSnapType: "x mandatory",
-  padding: "0 60px",
   scrollBehavior: "smooth",
 
   scrollbarWidth: "none", // Firefox 

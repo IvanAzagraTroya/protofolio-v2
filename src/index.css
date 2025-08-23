@@ -13,31 +13,31 @@ html, body, #root {
 }
 
 #app_canvas canvas::before {
-  width: 100vw !important;
-  height: 100vh !important;
+  width: 100dvw !important;
+  height: 100dvh !important;
 }
 
 #app_canvas {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100dvw;
+  height: 100dvh;
   z-index: 0; /* Ajusta según tu necesidad */
 }
 
 #div_section{
-  min-height: 100vh;
-  min-width: 100vw;
+  min-height: 100dvh;
+  min-width: 100%;
 }
 
 section {
-  min-height: 100vh;
+  min-height: 100dvh;
+  min-width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
   text-align: center;
   color: aliceblue;
   font-size: 2rem;
@@ -49,9 +49,9 @@ section {
 @media (max-width: 768px) {
   section {
     font-size: 1.2rem;
-    padding: 1.5rem;
   }
 }
+
 
 .projects-section,
 .technologies-section {
@@ -61,8 +61,8 @@ section {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 100vh; /* en lugar de height */
-  padding: 2rem; /* añade espacio interno */
+  min-height: 100dvh; /* en lugar de height */
+  min-width: 100%;
   box-sizing: border-box;
   overflow: hidden;
 }
@@ -74,7 +74,6 @@ section {
 @media (max-width: 768px) {
   .projects-section,
   .technologies-section {
-    padding: 1rem;
     font-size: 1rem;
   }
 }
@@ -83,7 +82,6 @@ section {
   .projects-section,
   .technologies-section {
     font-size: 0.9rem;
-    padding: 0.8rem;
   }
 }
 
@@ -95,7 +93,6 @@ section {
 
 @media (max-width: 768px) {
   .projects-container{
-    padding: 1rem;
     font-size: 1rem;
   }
 }
@@ -103,7 +100,6 @@ section {
 @media (max-width: 480px) {
   .projects-container{
     font-size: 0.9rem;
-    padding: 0.8rem;
   }
 }
 
@@ -136,38 +132,32 @@ section {
   background: radial-gradient(48.58% 48.58% at 49.96% 59.07%, #FFF38B 0%, rgba(180, 174, 113, 0.45) 38.02%, rgba(59, 61, 70, 0) 100%);
 }
 
-.star1 {
-  animation: 3s linear 1s infinite alternate twinkle;
+/* Aplica la animación a cualquier clase que empiece por "star" */
+[class^="star"], [class*=" star"] {
+  animation-name: twinkle;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  will-change: opacity;
 }
 
-.star2 {
-  animation: 4s linear 0s infinite alternate twinkle;
-}
-
-.star3 {
-  animation: 3.5s linear 0.5s infinite alternate twinkle;
-}
-
-.star4 {
-  animation: 1.25s linear 1.5s infinite alternate twinkle;
-}
-
-.star5 {
-  animation: 4s linear 2s infinite alternate twinkle;
-}
-
-.star6 {
-  animation: 2.5s linear 1s infinite alternate twinkle;
-}
+/* Duraciones y delays por estrella */
+.star1 { animation-duration: 3s;   animation-delay: 1s; }
+.star2 { animation-duration: 4s;   animation-delay: 0s; }
+.star3 { animation-duration: 3.5s; animation-delay: 0.5s; }
+.star4 { animation-duration: 1.25s;animation-delay: 1.5s; }
+.star5 { animation-duration: 4.5s; animation-delay: 2s; }
+.star6 { animation-duration: 2.5s; animation-delay: 1s; }
 
 @keyframes twinkle {
-  0% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
+  0% { opacity: 1; }
+  50% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [class^="star"], [class*=" star"] {
+    animation: none !important;
+    opacity: 1 !important;
   }
 }

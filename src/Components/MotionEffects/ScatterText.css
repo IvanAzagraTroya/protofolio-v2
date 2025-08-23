@@ -5,8 +5,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100vw;
-    height: 30vh;            /* Ocupa toda la altura de la ventana */
+    width: 100dvw;
+    height: 30dvh;            /* Ocupa toda la altura de la ventana */
     margin: 0 auto;           /* Centra horizontalmente en cualquier ancho */
     text-align: center;
     overflow: hidden;         /* Evita scroll interno si hay animaciones muy intensas */
@@ -20,10 +20,10 @@
   }
   
   /* 3. Estilo del texto (<h1>) */
-  .h1 {
+  h1 {
     font-family: Arial, sans-serif;
     font-size: 2rem;
-    color: #0f1115;
+    color: #d2e1ff;
     margin: 0;
     line-height: 1.2;
     /* Inicia invisible hasta que splitText y animaciones activen visibilidad */

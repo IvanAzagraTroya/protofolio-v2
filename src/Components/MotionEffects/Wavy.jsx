@@ -43,7 +43,7 @@ export default function WavyText({text}) {
 
     return (
         <div className="container" ref={containerRef}>
-            <h1 className="h1">
+            <h1>
                 <span className="wavy">{text}</span>
             </h1>
         </div>

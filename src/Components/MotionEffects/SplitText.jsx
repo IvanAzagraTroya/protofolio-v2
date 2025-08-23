@@ -37,7 +37,7 @@ export default function SplitText({text}) {
 
     return (
         <div className="container" ref={containerRef}>
-            <h1 className="h1">
+            <h1>
                 <WavyText className="split-char" key={text} text={text} />
             </h1>
             <Stylesheet />

@@ -1,6 +1,6 @@
 import { FaLinkedin, FaGithub, FaTwitter } from "react-icons/fa";
 import "./Contact.css";
-import ScatterText from "../MotionEffects/ScatterText";
+import ScatterText from "./MotionEffects/ScatterText";
 import { MdEmail } from "react-icons/md";
 
 import {
@@ -20,6 +20,7 @@ export default function Contact() {
           target="_blank"
           rel="noopener noreferrer"
           className="icon-link"
+          aria-label="Linkedin de Iván Azagra Troya"
         >
           <FaLinkedin />
         </a>
@@ -28,6 +29,7 @@ export default function Contact() {
           target="_blank"
           rel="noopener noreferrer"
           className="icon-link"
+          aria-label="Github de Iván Azagra Troya"
         >
           <FaGithub />
         </a>
@@ -36,6 +38,7 @@ export default function Contact() {
           target="_blank"
           rel="noopener noreferrer"
           className="icon-link"
+          aria-label="Cuenta de twitter de desarrollo de videojuegos"
         >
           <FaTwitter />
         </a>
@@ -46,6 +49,7 @@ export default function Contact() {
             href="mailto:ivanazagratroya@hotmail.com"
             target="-blank"
             className="icon-link"
+            aria-label="Enviar un correo a Iván Azagra Troya"
             >
                 <MdEmail />
               </a>

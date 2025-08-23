@@ -1,23 +1,31 @@
-import React, { useEffect, useRef } from "react"
+import React, { useEffect, useRef, useState } from "react"
 
 export default function StarFieldHtml() {
   const containerRef = useRef(null)
+  const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
-    const sizes = [1, 1, 2, 3, 4]
+    const mobile = /Mobi|Android/i.test(navigator.userAgent)
+    setIsMobile(mobile)
 
-    // Distribución sesgada: más estrellas arriba
+    const numStars = mobile ? 50 : 100
+    const sizes = [1, 1, 2, 3, 4, 2]
+
     function biasedTop() {
-      return Math.pow(Math.random(), 2) * 100 // valores cercanos a 0 son más frecuentes
+      return Math.pow(Math.random(), 2) * numStars
     }
 
     function randomLeft() {
-      return Math.floor(Math.random() * 101) // 0 a 100
+      return Math.random() * 100
     }
 
     const container = containerRef.current
+    if (!container) return
 
-    for (let i = 0; i < 100; i++) {
+    // Limpiar estrellas previas si hay
+    container.innerHTML = ""
+
+    for (let i = 0; i < numStars; i++) {
       const top = biasedTop()
       const left = randomLeft()
       const randomSize = sizes[Math.floor(Math.random() * sizes.length)]
@@ -31,12 +39,8 @@ export default function StarFieldHtml() {
       div.style.backgroundColor = "#FFFFFF"
       div.style.borderRadius = "50%"
 
-      if (i <= 50) div.classList.add("star1")
-      else if (i <= 100) div.classList.add("star2")
-      else if (i <= 150) div.classList.add("star3")
-      else if (i <= 200) div.classList.add("star4")
-      else if (i <= 250) div.classList.add("star5")
-      else div.classList.add("star6")
+      // Clases opcionales
+      div.classList.add(`star${(i % 6) + 1}`)
 
       container.appendChild(div)
     }
@@ -45,7 +49,6 @@ export default function StarFieldHtml() {
   return (
     <div
       ref={containerRef}
-      loading="lazy"
       style={{
         position: "absolute",
         top: 0,

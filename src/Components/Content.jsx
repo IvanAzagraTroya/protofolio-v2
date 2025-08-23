@@ -1,12 +1,15 @@
 import React, { useEffect, useState, Suspense, lazy } from "react"
 import { DotLottieReact } from "@lottiefiles/dotlottie-react"
-import AnimatedText from "../MotionEffects/AnimatedText"
-import ScrollTriggered from "../MotionEffects/ScrollTriggeredAnimation"
-import Technologies from "./Technologies"
+import AnimatedText from "./MotionEffects/AnimatedText.jsx"
+import ScrollTriggered from "./MotionEffects/ScrollTriggeredAnimation.js"
 
 import StarFieldHtml from './BackgroundHtml.jsx'
 import './Clouds.css'
 import Contact from "./Contact.jsx"
+import LazyTechnologies from "./Observers/LazyTechnologies.jsx"
+import LazyProjects from "./Observers/LazyProjects.jsx"
+
+//const LazyDotLottie = React.lazy(() => import("@lottiefiles/dotlottie-react"));
 
 export default function Content() {
     const titles = ["Backend Developer", "Game Developer"]
@@ -22,13 +25,12 @@ export default function Content() {
     return (
         <>
             <div className="clouds clouds-1" />
-            <div className="clouds clouds-2" />
             <div className="clouds clouds-3" />
             
             <StarFieldHtml />
             <div className="div_section">
                 <section className="section">
-                    <h2>Hola soy Iván Azagra👋</h2>
+                    <h2 style={{marginTop: "30%"}}>Hola soy Iván Azagra👋</h2>
                     <AnimatedText text={titles[currentIndex]} />
                     <Suspense fallback={<div>Scroll down</div>}>
                         <DotLottieReact src={"./ScrollDownArrows.json"} loop={true} autoplay={true} />
@@ -58,8 +60,22 @@ export default function Content() {
                 <section className="projects-section">
                     <h2> Projects </h2>
                     <div className="projects-container">
-                        <ScrollTriggered />
-                        <Suspense fallback= {<div>Pulse en la carta</div>}>
+                        <LazyProjects />
+                        <Suspense fallback={
+                            <div
+                            style={{
+                                width: "80vw",
+                                height: "380px",
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
+                                background: "rgba(255,255,255,0.05)",
+                                borderRadius: "20px",
+                            }}
+                            >
+                            <p style={{ color: "#aaa" }}>Touch the cards</p>
+                            </div>
+                        }>
                             <DotLottieReact src={"./touch.json"} loop={true} autoplay={true} style={{height: "100px", width: "100px"}}/>
                         </Suspense>
                     </div>
@@ -69,13 +85,13 @@ export default function Content() {
             <div className="div_section">
                 <section className="technologies-section">
                   <h2 className="technologies-title">Technologies</h2>
-                  <Technologies />
+                  <LazyTechnologies />
                 </section>
             </div>
             <div className="div_section">
                 <section className="section">
                     <Contact />
-                    <Suspense fallback={<div>Miau, aquí hay un gato</div>}>
+                    <Suspense fallback={<div>🐈‍⬛</div>}>
                         <DotLottieReact src={"./CatMovement.json"} loop={true} autoplay={true} />
                     </Suspense>
                 </section>
